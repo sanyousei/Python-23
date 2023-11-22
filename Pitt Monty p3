@@ -1,0 +1,42 @@
+#Cody Majetich | 11/14/2023 | Period 8
+
+from random import randint
+
+r = int(input('How many rounds of the simulation? (10-10k): '))
+#user error checking:
+while(r<10 or r>10000):
+  r = int(input('How many rounds of the simulation? (10-10k): '))
+wins = 0
+newDoor = 0
+prize = 0
+switch = input('Should the player switch? (Y/N): ')
+switch = switch.title()
+for x in range(0,r):
+  x+=1
+  prize = randint(1,3)
+  guess = randint(1,3)
+  if(prize == guess and switch == 'Y'):
+    if(guess == 1):
+        newDoor = 2
+    if(guess ==2):
+        newDoor = 3
+    if(guess ==3):
+        newDoor = 1
+  elif(prize != guess and switch == 'Y'):
+    if(prize == 1 and guess == 2 or prize == 1 and guess == 3):
+      newDoor = 1
+    if(prize == 2 and guess == 1 or prize == 2 and guess == 3):
+      newDoor = 2
+    if(prize == 3 and guess == 1 or prize ==3 and guess == 2):
+      newDoor = 3
+  if(newDoor == prize):
+    wins+=1
+  else:
+    newDoor = guess
+
+
+
+#calculating and printing %'s and rates
+percent = (wins/r)*100
+print(f'User won {wins} games out of {r}.')
+print(f'{percent}% of the time, you win.')
